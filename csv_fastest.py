@@ -3,7 +3,7 @@ import sys
 fields = [int(x) - 1 for x in sys.argv[1].split(',')]
 
 ### START BOILERPLATE ###
-buffer_size = 1024 * 1024
+buffer_size = 1024 * 512
 starts = [0 for _ in range(1 << 16)]
 ends   = [0 for _ in range(1 << 16)]
 comma = bytearray(b',')[0]

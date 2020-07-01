@@ -20,6 +20,48 @@ if you need to go faster than this, look into using similar techniques to minimi
 
 ## demo
 
-![](images/time.png)
+```
+>> time pypy3 gen_csv.py 8 15000000 > /tmp/large.csv
+real    0m9.075s
+```
 
-![](images/checksum.png)
+```
+>> ls -lh /tmp/large.csv
+-rw-r--r-- 1 nathants nathants 1.1G Jul  1 13:24 /tmp/large.csv
+```
+
+```
+>> time pypy3 csv_stdlib.py 3,7 </tmp/large.csv >/dev/null
+real    0m17.199s
+```
+
+```
+>> time pypy3 csv_faster.py 3,7 </tmp/large.csv >/dev/null
+real    0m6.636s
+```
+
+```
+>> time pypy3 csv_fastest.py 3,7 </tmp/large.csv >/dev/null
+real    0m4.259s
+```
+
+```
+>> time python3 csv_stdlib.py 3,7 </tmp/large.csv >/dev/null
+real    0m21.720s
+```
+
+```
+>> time python3 csv_faster.py 3,7 </tmp/large.csv >/dev/null
+real    0m11.531s
+```
+
+```
+>> pypy3 csv_stdlib.py 3,7 </tmp/large.csv | md5sum
+b64f540b7a1713bcc9f509ff3f9062a5  -
+
+>> pypy3 csv_faster.py 3,7 </tmp/large.csv | md5sum
+b64f540b7a1713bcc9f509ff3f9062a5  -
+
+>> pypy3 csv_fastest.py 3,7 </tmp/large.csv | md5sum
+b64f540b7a1713bcc9f509ff3f9062a5  -
+```
